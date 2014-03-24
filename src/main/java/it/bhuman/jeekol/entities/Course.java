@@ -57,7 +57,7 @@ public class Course
     /**
      * @return the attendees
      * 
-     * questa campo deve mappare una relazione 1:N unidirezionale
+     * questa campo deve mappare una relazione N:M unidirezionale
      * 
      */
     public Set<Student> getAttendees()
