@@ -18,10 +18,10 @@
  */
 package it.bhuman.jeekol.services;
 
-import it.bhuman.jeekol.entities.Course;
+import it.bhuman.jeekol.ejb.CourseEJB;
+//import it.bhuman.jeekol.entities.Course;
 import it.bhuman.jeekol.entities.Student;
 import java.util.Set;
-import java.util.logging.Level;
 import javax.ejb.EJB;
 import javax.ws.rs.GET;
 import javax.ws.rs.Path;
@@ -36,40 +36,35 @@ import javax.ws.rs.core.Response;
  */
 @Path("/training")
 @Produces(MediaType.APPLICATION_JSON)
-public class CoursesRESTService
-{
+public class CoursesRESTService {
+
     @EJB
-    private DummyDataStore dataStore;
+    private CourseEJB courseEJB;
 
     @GET
     @Path("/courses")
-    public Response getCourses()
-    {
-        return Response.ok().entity(dataStore.findAllCourses()).build();
+    public Response getCourses() {
+        return Response.ok().entity(courseEJB.listCourses()).build();
     }
 
-    @GET
-    @Path("/course/{id}")
-    public Response getCourse(@PathParam("id") long id)
-    {
-        Course course = dataStore.findCourseById(id);
-
-        if (course == null)
-        {
-            return Response.status(Response.Status.NOT_FOUND).build();
-        }
-
-        return Response.ok().entity(course).build();
-    }
+//    @GET
+//    @Path("/course/{id}")
+//    public Response getCourse(@PathParam("id") long id) {
+//        Course course = courseEJB.findCourseById(id);
+//
+//        if (course == null) {
+//            return Response.status(Response.Status.NOT_FOUND).build();
+//        }
+//
+//        return Response.ok().entity(course).build();
+//    }
 
     @GET
     @Path("/course/{id}/attendees")
-    public Response getAttendees(@PathParam("id") long id)
-    {
-        Set<Student> attendees = dataStore.findStudensByCourseId(id);
+    public Response getAttendees(@PathParam("id") long id) {
+        Set<Student> attendees = courseEJB.findStudensByCourseId(id);
 
-        if (attendees == null)
-        {
+        if (attendees == null) {
             return Response.status(Response.Status.NOT_FOUND).build();
         }
 

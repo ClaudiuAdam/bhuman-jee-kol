@@ -3,11 +3,11 @@
 
     <div class="panel-body">
         <table class="table table-striped">
-            <tr><th>Corso</th><th>Anno</th><th>Maschi/Femmine</th></tr>
+            <tr><th>Corso</th><th>Anno</th><th>Femmine/Maschi</th></tr>
             <tr ng-repeat="course in courses">
                 <td><a href="#/attendees/{{course.id}}" class="thumb">{{course.name}}</a></td>
                 <td>{{course.year}}</td>
-                <td>?</td>
+                <td>{{course.femaleStudents}}/{{course.maleStudents}}</td>
             </tr>
         </table>
     </div>
